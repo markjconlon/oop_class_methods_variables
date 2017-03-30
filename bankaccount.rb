@@ -19,7 +19,7 @@ class BankAccount
 
   def self.interest_time
     @@accounts.each do |account|
-      account[0] = account[0] * (1 + @@interest_rate)
+      account.balance = (account.balance * (1+ @@interest_rate))
     end
   end
 
