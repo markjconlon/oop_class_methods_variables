@@ -48,21 +48,41 @@ class Zombie
     end
   end
 
+  def encounter
+    if self.outrun_zombie?
+      puts "Phew that was close."
+    elsif self.survive_attack?
+      @@horde << Zombie.new()
+      puts "You were turned :("
+    else
+      puts "You were mauled to death"
+    end
+  end
+
+  def outrun_zombie?
+    rand(@@max_speed + 1 ) > @speed #in this instance of zombie can use instance variable
+  end
+
+  def survive_attack?
+    rand(@@max_strength +1 ) > @strength
+  end
 end
 
 
-# mark = Zombie.new(3, 3)
-# joe = Zombie.new(10,10)
-#
-# puts mark.inspect
-# puts joe.inspect
-Zombie.spawn
-Zombie.spawn
-Zombie.spawn
-Zombie.spawn
-puts Zombie.all
+puts Zombie.all.inspect # []
 Zombie.new_day
+puts Zombie.all.inspect # [#<Zombie:0x005626ecc5ebd0 @speed=4, @strength=0>, #<Zombie:0x005626ecc5eba8 @speed=0, @strength=4>, #<Zombie:0x005626ecc5eb80 @speed=4, @strength=4>]
+zombie1 = Zombie.all[0]
+zombie2 = Zombie.all[1]
+zombie3 = Zombie.all[2]
+puts zombie1.encounter # You are now a zombie
+puts zombie2.encounter # You died
+puts zombie3.encounter # You died
 Zombie.new_day
-Zombie.new_day
-Zombie.new_day
-Zombie.new_day
+puts Zombie.all.inspect # [#<Zombie:0x005626ecc5e1f8 @speed=0, @strength=0>, #<Zombie:0x005626ecc5e180 @speed=3, @strength=3>, #<Zombie:0x005626ecc5e158 @speed=1, @strength=2>, #<Zombie:0x005626ecc5e090 @speed=0, @strength=4>]
+zombie1 = Zombie.all[0]
+zombie2 = Zombie.all[1]
+zombie3 = Zombie.all[2]
+puts zombie1.encounter # You got away
+puts zombie2.encounter # You are now a zombie
+puts zombie3.encounter # You died
