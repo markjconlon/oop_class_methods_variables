@@ -1,15 +1,26 @@
 class Vampire
+  attr_reader :name
   @@coven = []
   @@night = true
 
   def self.create(name, age)
-    vampire = Vampire.new
+    vampire = Vampire.new(name, age)
     @@coven.push(vampire)
     return vampire
   end
 
   def self.sunrise
+    @@coven.each do |vampire|
+      unless @in_coffin && @drank_blood_today
+        @@coven.delete(vampire)
+        puts "#{vampire.name} did not make it"
+      end
+    end
+  end
 
+  def self.sunset
+
+  end
 
   def initialize(name, age)
     @name = name
@@ -24,6 +35,5 @@ class Vampire
 
   def hunt
     drink_blood if rand(5) <= 1      #60 % chance they will be able to feed
-    end
   end
 end
