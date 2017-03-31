@@ -1,5 +1,6 @@
 class Vampire
   attr_reader :name
+  attr_accessor :in_coffin, :drank_blood_today
   @@coven = []
   @@night = true
 
@@ -19,7 +20,11 @@ class Vampire
   end
 
   def self.sunset
-
+    @@coven.each do |vampire|
+      vampire.drank_blood_today = false
+      vampire.in_coffin = false
+      vampire.hunt
+    end
   end
 
   def initialize(name, age)
