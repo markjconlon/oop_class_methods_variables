@@ -36,6 +36,12 @@ class Vampire
     @@coven
   end
 
+  def self.go_home #placeholder may add randomness in the furture
+    @@coven.each do |vampire|
+      vampire.in_coffin = true
+    end
+  end
+
   def initialize(name, age)
     @name = name
     @age = age
